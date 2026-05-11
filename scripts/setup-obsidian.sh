@@ -10,13 +10,13 @@ mkdir -p "$CONFIG_DIR/lua/config"
 read -r -p "Primary vault name [personal]: " primary_name
 primary_name=${primary_name:-personal}
 
-read -r -p "Primary vault path [~/notes/personal]: " primary_path
+read -e -r -p "Primary vault path [~/notes/personal]: " primary_path
 primary_path=${primary_path:-~/notes/personal}
 
 read -r -p "Second vault name [studies]: " second_name
 second_name=${second_name:-studies}
 
-read -r -p "Second vault path [~/notes/studies]: " second_path
+read -e -r -p "Second vault path [~/notes/studies]: " second_path
 second_path=${second_path:-~/notes/studies}
 
 read -r -p "Default notes subdir [01 Inbox]: " notes_subdir

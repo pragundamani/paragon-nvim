@@ -33,6 +33,19 @@ nvim
 
 `lazy.nvim` will bootstrap automatically and install plugins.
 
+For a guided first-run setup instead, use:
+
+```bash
+~/.config/nvim/scripts/install.sh
+```
+
+The installer will:
+
+- prompt for your Obsidian vaults
+- let you use `Tab` for path completion while choosing paths
+- write your local override file
+- run `:Lazy sync`
+
 If you use Obsidian, run the setup helper once:
 
 ```bash
