@@ -1,3 +1,13 @@
+local ok, local_config = pcall(require, "config.local")
+
+local obsidian = ok and local_config.obsidian or {}
+local workspaces = obsidian.workspaces or {
+  { name = "personal", path = "~/notes/personal" },
+  { name = "studies", path = "~/notes/studies" },
+}
+
+local notes_subdir = obsidian.notes_subdir or "01 Inbox"
+
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
@@ -20,11 +30,8 @@ return {
   },
   opts = {
     legacy_commands = false,
-    workspaces = {
-      { name = "no_name_for_notes", path = "~/notes/no_name_for_notes" },
-      { name = "studies", path = "~/notes/studies" },
-    },
-    notes_subdir = "01 Inbox",
+    workspaces = workspaces,
+    notes_subdir = notes_subdir,
     preferred_link_style = "wiki",
     new_notes_location = "notes_subdir",
     completion = {

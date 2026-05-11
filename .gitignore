@@ -9,3 +9,5 @@ data
 .DS_Store
 .codex
 .codex/
+lua/config/local.lua
+scripts/update-config.sh

@@ -22,7 +22,7 @@ mv ~/.cache/nvim ~/.cache/nvim.bak
 Clone this repo into place:
 
 ```bash
-git clone https://github.com/USER/REPO.git ~/.config/nvim
+git clone https://github.com/pragundamani/paragon-nvim.git ~/.config/nvim
 ```
 
 Then start Neovim:
@@ -32,6 +32,18 @@ nvim
 ```
 
 `lazy.nvim` will bootstrap automatically and install plugins.
+
+If you use Obsidian, run the setup helper once:
+
+```bash
+~/.config/nvim/scripts/setup-obsidian.sh
+```
+
+To update the config later:
+
+```bash
+~/.config/nvim/scripts/update-config.sh
+```
 
 ## Requirements
 
@@ -110,6 +122,19 @@ Commands:
 - `<leader>ow` switch workspace
 - `<leader>op` paste image
 - `<leader>oc` table of contents
+
+## Local Obsidian Setup
+
+This repo ships with portable placeholder vaults:
+
+- `~/notes/personal`
+- `~/notes/studies`
+
+Your personal vault paths should go in:
+
+- `lua/config/local.lua`
+
+That file is intentionally git-ignored so each user can keep local vault paths without changing the repo.
 
 ## Checklist States
 

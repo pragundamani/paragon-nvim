@@ -1,0 +1,9 @@
+return {
+  obsidian = {
+    workspaces = {
+      { name = "personal", path = "~/notes/personal" },
+      { name = "studies", path = "~/notes/studies" },
+    },
+    notes_subdir = "01 Inbox",
+  },
+}
