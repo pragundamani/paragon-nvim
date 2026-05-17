@@ -95,6 +95,9 @@ Linux:
 ### Utility workflow
 
 - smart build commands for file and project builds
+- C++ and Python LSP via `clangd` and `basedpyright`
+- DAP debugging via `nvim-dap`, `nvim-dap-ui`, `codelldb`, and `debugpy`
+- formatting and linting for C/C++/Python with `conform.nvim` and `nvim-lint`
 - PDF reading inside Neovim
 - custom `pitchblack_neon` colorscheme
 
@@ -106,11 +109,21 @@ Linux:
 - `<C-A-n>` build/run current file
 - `<C-A-N>` build current project folder
 
+For CMake projects, first configure/build now uses `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON` so `clangd` can pick up project compile flags.
+
 Commands:
 
 - `:Build`
 - `:BuildFile`
 - `:BuildFolder`
+
+### Debug keys
+
+- `<leader>db` toggle breakpoint
+- `<leader>dc` continue debugger
+- `<leader>ds` step over
+
+Python debugging prefers a local `.venv` or `venv` when present. `basedpyright` uses the same interpreter resolution.
 
 ### Markdown keys
 

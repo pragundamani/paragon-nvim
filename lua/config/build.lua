@@ -2,26 +2,13 @@
 -- Run :BuildFile or :BuildFolder, or use the configured keymaps to build the
 -- current file or current working directory in a terminal split.
 
+local dev = require("config.dev")
+
 local M = {}
 local runner_buf
 
 local function output_name(stem)
   return vim.fn.shellescape("./" .. stem .. ".out")
-end
-
-local function resolve_root()
-  local current = vim.api.nvim_buf_get_name(0)
-  local start = current ~= "" and vim.fs.dirname(current) or vim.fn.getcwd()
-  return vim.fs.root(start, {
-    "Cargo.toml",
-    "Makefile",
-    "makefile",
-    "GNUmakefile",
-    "CMakeLists.txt",
-    "package.json",
-    "pyproject.toml",
-    ".git",
-  }) or vim.fn.getcwd()
 end
 
 local function open_runner(cmd, cwd)
@@ -53,14 +40,8 @@ local function open_runner(cmd, cwd)
 end
 
 local function resolve_python()
-  for _, candidate in ipairs({ "python3", "python" }) do
-    local executable = vim.fn.exepath(candidate)
-    if executable ~= "" then
-      return vim.fn.shellescape(executable)
-    end
-  end
-
-  return nil
+  local python = dev.resolve_python()
+  return python and vim.fn.shellescape(python) or nil
 end
 
 local function build_current_file()
@@ -108,7 +89,7 @@ local function build_current_file()
 end
 
 local function build_current_folder()
-  local cwd = resolve_root()
+  local cwd = dev.resolve_root()
   local cmd = nil
 
   if vim.fn.filereadable(cwd .. "/Cargo.toml") == 1 then
@@ -121,7 +102,7 @@ local function build_current_folder()
     if vim.fn.isdirectory(cwd .. "/build") == 1 then
       cmd = "cmake --build build"
     else
-      cmd = "cmake -S . -B build && cmake --build build"
+      cmd = "cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build build"
     end
   elseif #vim.fn.globpath(cwd, "*.cpp", false, true) > 0 then
     local out_stem = vim.fs.basename(cwd)
